@@ -34,6 +34,9 @@
                 .catch(err => {
 
                 })
+        },
+        editClient(item) {
+          console.log(item)
         }
     },
   }

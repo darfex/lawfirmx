@@ -42,12 +42,9 @@ DB_PASSWORD
 
 Fill in maittrap credentials in the .env file
 ```
-MAIL_MAILER
-MAIL_HOST
-MAIL_PORT
+
 MAIL_USERNAME
 MAIL_PASSWORD
-MAIL_ENCRYPTION
 ```
 
 Run the database migration
