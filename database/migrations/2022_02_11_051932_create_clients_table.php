@@ -14,14 +14,16 @@ class CreateClientsTable extends Migration
     public function up()
     {
         Schema::create('clients', function (Blueprint $table) {
-            $table->id();
-            $table->string('firstname');
-            $table->string('lastname');
+            $table->uuid('id')->primary();
+            $table->string('first_name');
+            $table->string('last_name');
             $table->string('email')->unique();
+            $table->dateTime('date_profiled')->default(now());
             $table->string('primary_legal_counsel');
             $table->date('date_of_birth');
-            $table->string('image')->nullable();
-            $table->text('case_details');
+            $table->string('profile_image')->nullable();
+            $table->longText('case_details');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

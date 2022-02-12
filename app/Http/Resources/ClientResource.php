@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ClientResource extends JsonResource
@@ -14,6 +15,15 @@ class ClientResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'firstName'           => $this->first_name,
+            'lastName'            => $this->last_name,
+            'email'               => $this->email,
+            'dateProfiled'        => Carbon::parse($this->date_profiled)->toDateString(),
+            'primaryLegalCounsel' => $this->primary_legal_counsel,
+            'caseDetails'         => $this->case_details,
+            'dateOfBirth'         => $this->date_of_birth,
+            'profileImage'        => $this->profile_image
+        ];
     }
 }

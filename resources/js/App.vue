@@ -1,21 +1,18 @@
 <template>
-	<div>
-		<navbar></navbar>
-		<dashboard></dashboard>
-	</div>
+  <div class="app">
+    <Navbar></Navbar>
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
-	import home from './components/home.vue';
-	import navbar from './components/navbar.vue';
-	import dashboard from './components/dashboard.vue';
+import './Styles/app.scss'
 
-	export default {
-		components:{
-			home,
-			navbar,
-			dashboard
-		}
-			
-	}
+export default {
+  name: 'app',
+  components: {
+    Navbar: () => import('./Components/Navbar.vue')
+  }
+}
 </script>
+
