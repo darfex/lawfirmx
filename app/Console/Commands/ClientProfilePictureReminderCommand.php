@@ -3,8 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Models\Client;
-use App\Notifications\ProfilePictureReminder;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\ProfilePictureReminder;
 
 class ClientProfilePictureReminderCommand extends Command
 {
@@ -41,10 +42,6 @@ class ClientProfilePictureReminderCommand extends Command
     {
         $clients = Client::where('profile_image', null)->get();
 
-        foreach($clients as $client)
-        {
-            $client->notify((new ProfilePictureReminder($client))->delay(now()->addSeconds(5)));
-        }
-
+        Notification::send($clients, new ProfilePictureReminder());
     }
 }

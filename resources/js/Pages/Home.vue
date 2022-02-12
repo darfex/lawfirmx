@@ -3,7 +3,9 @@
     <b-container class="bv-example-row mt-5">
         <router-link to="/client/add" class="btn btn-info text-white">Profile New Client</router-link>
         <b-table class="mt-5" striped hover :items="clients" :fields="fields">
-          <b-link href="#foo"></b-link>
+          <template v-slot:cell(actions)="{ item }">
+            <span><b-btn @click="editClient(item)">Edit</b-btn></span>
+          </template>
         </b-table>
     </b-container>
   </div>

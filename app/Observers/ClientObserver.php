@@ -10,7 +10,7 @@ class ClientObserver
 
     public function created(Client $client)
     {
-        $client->notify((new ClientCreated($client))->delay(now()->addSeconds(5)));
+        $client->notify((new ClientCreated()));
     }
 
 }

@@ -2,7 +2,6 @@
 
 namespace App\Notifications;
 
-use App\Models\Client;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -12,15 +11,14 @@ class ClientCreated extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    public $client;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Client $client)
+    public function __construct()
     {
-        $this->client = $client;
+
     }
 
     /**
@@ -43,7 +41,7 @@ class ClientCreated extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                            ->greeting('Hello '.$this->client->first_name)
+                            ->greeting('Hello '.$notifiable->first_name)
                             ->line('Welcome to Law Firm X')
                             ->line('Thank you for trusting us!');
     }

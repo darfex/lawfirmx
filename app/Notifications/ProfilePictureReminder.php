@@ -4,24 +4,23 @@ namespace App\Notifications;
 
 use App\Models\Client;
 use Illuminate\Bus\Queueable;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Notification;
 
-class ProfilePictureReminder extends Notification
+class ProfilePictureReminder extends Notification implements ShouldQueue
 {
     use Queueable;
-
-    public $client;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Client $client)
+    public function __construct()
     {
-        $this->client = $client;
+        
     }
 
     /**
@@ -45,7 +44,7 @@ class ProfilePictureReminder extends Notification
     {
         return (new MailMessage)
                     ->subject('Reminder')
-                    ->greeting('Hello '.$this->client->first_name)
+                    ->greeting('Hello '.$notifiable->first_name)
                     ->line('You have not submitted your passport photograph at Firm X.')
                     ->line('Please do that as soon as possible');
     }
