@@ -61,7 +61,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context.next = 2;
                 return _this.axios.get("api/client").then(function (res) {
                   _this.clients = res.data.data.clients;
-                })["catch"](function (err) {});
+                })["catch"](function (err) {
+                  if (err.response.status == 422) {
+                    var data = [];
+                    console.log(err.response.status); // for(const key in err.response.data.errors){
+                    // }
+                  }
+                });
 
               case 2:
               case "end":
@@ -145,7 +151,7 @@ var render = function () {
                             },
                           },
                         },
-                        [_vm._v("Edit")]
+                        [_vm._v("View")]
                       ),
                     ],
                     1

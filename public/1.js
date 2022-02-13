@@ -95,6 +95,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'add-client',
   data: function data() {
@@ -125,7 +128,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         } // this.$router.push({name: 'home'});
 
       })["catch"](function (err) {
-        if (err.response && err.response.status == 422) {}
+        if (err.response && err.response.status == 422) {
+          var data = [];
+
+          for (var key in err.response.data.errors) {
+            data.push(err.response.data.errors[key][0]);
+          }
+
+          errors.value = data;
+        }
       });
     },
     makeToast: function makeToast(title, content, variant) {

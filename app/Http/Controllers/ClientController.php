@@ -29,7 +29,7 @@ class ClientController extends Controller
         }
     }
 
-    public function store(Request $request) {
+    public function store(CreateClientRequest $request) {
         try {
             if($request->hasFile('profileImage') && !empty($request->profileImage))
             {

@@ -13,7 +13,7 @@
             <td>{{ client.firstName }}</td>
             <td>{{ client.lastName }}</td>
             <td>{{ client.email }}</td>
-            <td><b-link class="btn btn-sm btn-info" @click="openPage(client.id)">Edit</b-link></td>
+            <td><b-link class="btn btn-sm btn-info" @click="openPage(client.id)">View</b-link></td>
           </tbody>
         </table>
     </b-container>
@@ -39,7 +39,13 @@
                     this.clients = res.data.data.clients
                 })
                 .catch(err => {
+                  if(err.response.status == 422){
+                    var data = [];
+                    console.log(err.response.status)
+                    // for(const key in err.response.data.errors){
 
+                    // }
+                  }
                 })
         },
         openPage(clientId) {

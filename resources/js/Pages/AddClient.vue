@@ -3,6 +3,9 @@
     <b-container class="bv-example-row mt-5">
         <router-link to="/" class="btn btn-info text-white">All Clients</router-link>
         <b-form class="mt-5" @submit="onSubmit">
+            <!-- <div class="text-sm text-danger">
+                <p v-for="error in errors" :key="error"><small>{{ error }}</small></p>
+            </div> -->
         <b-row>
             <b-col>
                 <b-form-group label="First Name:">
@@ -96,7 +99,7 @@
         profileImage: null,
         dateOfBirth: '',
         caseDetails: '',
-        }
+        },
       }
     },
     created() {
@@ -117,7 +120,11 @@
             })
             .catch((err) => {
                 if (err.response && err.response.status == 422) {
-
+                    var data=[];
+                    for(const key in err.response.data.errors){
+                        data.push(err.response.data.errors[key][0])
+                    }
+                    errors.value = data;
                 }
             });
       },
