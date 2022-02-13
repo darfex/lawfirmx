@@ -39,17 +39,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      clients: [],
-      fields: ['firstName', 'lastName', 'email', 'id'],
       perPage: 10,
       currentPage: 1
     };
@@ -112,7 +104,7 @@ var render = function () {
           _c(
             "router-link",
             {
-              staticClass: "btn btn-info text-white",
+              staticClass: "btn btn-info text-white mb-4",
               attrs: { to: "/client/add" },
             },
             [_vm._v("Profile New Client")]
@@ -163,14 +155,8 @@ var render = function () {
             ],
             2
           ),
-          _vm._v(" "),
-          _vm._l(_vm.clients, function (client) {
-            return _c("div", { key: client.id }, [
-              _c("p", [_vm._v(_vm._s(client.first_name))]),
-            ])
-          }),
         ],
-        2
+        1
       ),
     ],
     1

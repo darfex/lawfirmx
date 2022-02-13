@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\Reminder;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Resources\ClientResource;
 use App\Http\Requests\CreateClientRequest;
@@ -28,11 +29,12 @@ class ClientController extends Controller
         }
     }
 
-    public function store(CreateClientRequest $request) {
+    public function store(Request $request) {
         try {
             if($request->hasFile('profileImage') && !empty($request->profileImage))
             {
                 $path = $request->profileImage->store('images/avatars');
+                $request->profileImage = $path;
             }
 
             $client = Client::create([
@@ -78,13 +80,7 @@ class ClientController extends Controller
     public function update($id, UpdateClientRequest $request)  {
         try {
             $client = Client::findOrFail($id);
-
-            if($request->hasFile('profileImage') && !empty($request->profileImage))
-            {
-                $path = $request->profileImage->store('images/avatars');
-            }
-
-            $client->update([
+            $data = [
                 'first_name'            => $request->firstName,
                 'last_name'             => $request->lastName,
                 'email'                 => $request->email,
@@ -92,7 +88,14 @@ class ClientController extends Controller
                 'date_of_birth'         => $request->dateOfBirth,
                 'case_details'          => $request->caseDetails,
                 'profile_image'         => $request->profileImage
-            ]);
+            ];
+
+            if($request->hasFile('profileImage') && !empty($request->profileImage))
+            {
+                $data['path'] = $request->profileImage->store('images/avatars');
+            }
+
+            $client->update($data);
 
             return response()->json([
                 'status' => true,

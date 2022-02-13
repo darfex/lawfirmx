@@ -116,7 +116,6 @@
                         } else {
                             this.makeToast("Success", response.data.message, 'danger')
                         }
-                        // this.$router.push({name: 'home'});
                     })
                     .catch((err) => {
                         if (err.response && err.response.status == 422) {

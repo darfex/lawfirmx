@@ -129,8 +129,7 @@ __webpack_require__.r(__webpack_exports__);
           _this.makeToast("Success", response.data.message, 'success');
         } else {
           _this.makeToast("Success", response.data.message, 'danger');
-        } // this.$router.push({name: 'home'});
-
+        }
       })["catch"](function (err) {
         if (err.response && err.response.status == 422) {}
       });

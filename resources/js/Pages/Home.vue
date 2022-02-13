@@ -1,9 +1,7 @@
 <template>
   <div>
     <b-container class="bv-example-row mt-5">
-        <router-link to="/client/add" class="btn btn-info text-white">Profile New Client</router-link>
-        <!-- <b-table class="mt-5" striped hover :items="clients" :fields="fields">
-        </b-table> -->
+        <router-link to="/client/add" class="btn btn-info text-white mb-4">Profile New Client</router-link>
         <table class="table border">
           <thead>
             <th>Firstname</th>
@@ -18,10 +16,6 @@
             <td><b-link class="btn btn-sm btn-info" @click="openPage(client.id)">Edit</b-link></td>
           </tbody>
         </table>
-
-        <div v-for="client in clients" :key="client.id">
-          <p>{{ client.first_name }}</p>
-        </div>
     </b-container>
   </div>
 </template>
@@ -30,8 +24,6 @@
   export default {
     data() {
       return {
-        clients: [],
-        fields: ['firstName', 'lastName', 'email', 'id'],
         perPage: 10,
         currentPage: 1,
       }
