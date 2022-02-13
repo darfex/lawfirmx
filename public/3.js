@@ -35,6 +35,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -45,7 +55,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   created: function created() {
-    this.fetchClients();
+    this.clients = this.fetchClients();
   },
   methods: {
     fetchClients: function fetchClients() {
@@ -69,8 +79,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    editClient: function editClient(item) {
-      console.log(item);
+    openPage: function openPage(clientId) {
+      this.$router.push("/client/edit/".concat(clientId));
     }
   }
 });
@@ -106,6 +116,52 @@ var render = function () {
               attrs: { to: "/client/add" },
             },
             [_vm._v("Profile New Client")]
+          ),
+          _vm._v(" "),
+          _c(
+            "table",
+            { staticClass: "table border" },
+            [
+              _c("thead", [
+                _c("th", [_vm._v("Firstname")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("Lastname")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("Email")]),
+                _vm._v(" "),
+                _c("th", [_vm._v(" ")]),
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.clients, function (client) {
+                return _c("tbody", { key: client.id }, [
+                  _c("td", [_vm._v(_vm._s(client.firstName))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(client.lastName))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(client.email))]),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    [
+                      _c(
+                        "b-link",
+                        {
+                          staticClass: "btn btn-sm btn-info",
+                          on: {
+                            click: function ($event) {
+                              return _vm.openPage(client.id)
+                            },
+                          },
+                        },
+                        [_vm._v("Edit")]
+                      ),
+                    ],
+                    1
+                  ),
+                ])
+              }),
+            ],
+            2
           ),
           _vm._v(" "),
           _vm._l(_vm.clients, function (client) {

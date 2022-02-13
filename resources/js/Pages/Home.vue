@@ -3,11 +3,21 @@
     <b-container class="bv-example-row mt-5">
         <router-link to="/client/add" class="btn btn-info text-white">Profile New Client</router-link>
         <!-- <b-table class="mt-5" striped hover :items="clients" :fields="fields">
-          <template v-slot:cell(actions)="{ item }">
-            <span><b-btn @click="editClient(item)">Edit</b-btn></span>
-            <router-link to="/client/edit/:item" class="btn btn-info text-white">Profile New Client</router-link>
-          </template>
         </b-table> -->
+        <table class="table border">
+          <thead>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Email</th>
+            <th>&nbsp;</th>
+          </thead>
+          <tbody v-for="client in clients" :key="client.id">
+            <td>{{ client.firstName }}</td>
+            <td>{{ client.lastName }}</td>
+            <td>{{ client.email }}</td>
+            <td><b-link class="btn btn-sm btn-info" @click="openPage(client.id)">Edit</b-link></td>
+          </tbody>
+        </table>
 
         <div v-for="client in clients" :key="client.id">
           <p>{{ client.first_name }}</p>
@@ -27,7 +37,7 @@
       }
     },
     created() {
-        this.fetchClients()
+        this.clients = this.fetchClients()
     },
     methods: {
         async fetchClients() {
@@ -40,8 +50,8 @@
 
                 })
         },
-        editClient(item) {
-          console.log(item)
+        openPage(clientId) {
+          this.$router.push(`/client/edit/${clientId}`)
         }
     },
   }
