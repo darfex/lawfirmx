@@ -41,7 +41,6 @@ class ClientProfilePictureReminderCommand extends Command
     public function handle()
     {
         $clients = Client::where('profile_image', null)->get();
-
         Notification::send($clients, new ProfilePictureReminder());
     }
 }

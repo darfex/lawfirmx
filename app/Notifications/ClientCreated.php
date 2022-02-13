@@ -41,6 +41,7 @@ class ClientCreated extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
+                            ->subject('Welcome')
                             ->greeting('Hello '.$notifiable->first_name)
                             ->line('Welcome to Law Firm X')
                             ->line('Thank you for trusting us!');

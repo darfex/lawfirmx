@@ -23,7 +23,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->commmand('profilepicture:reminder')-
+        $schedule->commmand('profilepicture:reminder')->daily();
     }
 
     /**

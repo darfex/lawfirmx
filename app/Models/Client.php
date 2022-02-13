@@ -33,4 +33,8 @@ class Client extends Model
         $this->attributes['email'] = strtolower($value);
     }
 
+    public function reminder()
+    {
+        return $this->hasOne(Reminder::class);
+    }
 }

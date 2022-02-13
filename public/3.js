@@ -28,11 +28,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       clients: [],
-      fields: ['firstName', 'lastName', 'email'],
+      fields: ['firstName', 'lastName', 'email', 'id'],
       perPage: 10,
       currentPage: 1
     };
@@ -61,6 +68,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee);
       }))();
+    },
+    editClient: function editClient(item) {
+      console.log(item);
     }
   }
 });
@@ -98,22 +108,13 @@ var render = function () {
             [_vm._v("Profile New Client")]
           ),
           _vm._v(" "),
-          _c(
-            "b-table",
-            {
-              staticClass: "mt-5",
-              attrs: {
-                striped: "",
-                hover: "",
-                items: _vm.clients,
-                fields: _vm.fields,
-              },
-            },
-            [_c("b-link", { attrs: { href: "#foo" } })],
-            1
-          ),
+          _vm._l(_vm.clients, function (client) {
+            return _c("div", { key: client.id }, [
+              _c("p", [_vm._v(_vm._s(client.first_name))]),
+            ])
+          }),
         ],
-        1
+        2
       ),
     ],
     1

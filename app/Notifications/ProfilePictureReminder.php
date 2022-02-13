@@ -2,7 +2,10 @@
 
 namespace App\Notifications;
 
+
+use Carbon\Carbon;
 use App\Models\Client;
+use App\Models\Reminder;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Notifications\Notification;
@@ -20,7 +23,7 @@ class ProfilePictureReminder extends Notification implements ShouldQueue
      */
     public function __construct()
     {
-        
+
     }
 
     /**
@@ -42,23 +45,28 @@ class ProfilePictureReminder extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
+        $this->updateRemider($notifiable->id);
         return (new MailMessage)
-                    ->subject('Reminder')
-                    ->greeting('Hello '.$notifiable->first_name)
-                    ->line('You have not submitted your passport photograph at Firm X.')
-                    ->line('Please do that as soon as possible');
+            ->subject('Reminder')
+            ->greeting('Hello '.$notifiable->first_name)
+            ->line('You have not submitted your passport photograph at Firm X.')
+            ->line('Please do that as soon as possible');
     }
 
     /**
-     * Get the array representation of the notification.
+     * Determine if the notification should be sent.
      *
      * @param  mixed  $notifiable
-     * @return array
+     * @return bool
      */
-    public function toArray($notifiable)
+    public function shouldSend($notifiable)
     {
-        return [
-            //
-        ];
+        $date = Client::where('id', $notifiable->id)->first()->reminder->next_date;
+        return Carbon::parse($date)->toDateString() == today()->toDateString();
     }
+
+    protected function updateRemider($client) {
+        Reminder::where('client_id', $client)->update(['next_date' => today()->addDays(3)->toDateString()]);
+    }
+
 }

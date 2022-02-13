@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Reminder;
 use Illuminate\Support\Facades\Log;
 use App\Http\Resources\ClientResource;
 use App\Http\Requests\CreateClientRequest;
@@ -33,7 +34,7 @@ class ClientController extends Controller
             {
                 $path = $request->profileImage->store('images/avatars');
             }
-            
+
             $client = Client::create([
                 'first_name'            => $request->firstName,
                 'last_name'             => $request->lastName,
@@ -104,9 +105,5 @@ class ClientController extends Controller
         catch (\Throwable $th) {
             throw $th;
         }
-    }
-
-    private function uploadImage() {
-
     }
 }
