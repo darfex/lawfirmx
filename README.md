@@ -1,4 +1,4 @@
-# BP Checker
+# Client Profiler
 A Laravel plus vue application to profile clients
 
 ## Tools
